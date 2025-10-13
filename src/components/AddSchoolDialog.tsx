@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Plus } from "lucide-react";
 import { School } from "@/types/school";
 
@@ -21,6 +22,7 @@ export const AddSchoolDialog = ({ onAdd }: AddSchoolDialogProps) => {
     useCommonApp: false,
     useApplyTexas: false,
     useUniversityPortal: false,
+    applicationStatus: "not-started" as "not-started" | "in-progress" | "submitted",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -34,6 +36,8 @@ export const AddSchoolDialog = ({ onAdd }: AddSchoolDialogProps) => {
       useCommonApp: formData.useCommonApp,
       useApplyTexas: formData.useApplyTexas,
       useUniversityPortal: formData.useUniversityPortal,
+      applicationStatus: formData.applicationStatus,
+      recommenders: [],
       events: [],
     };
     onAdd(newSchool);
@@ -45,6 +49,7 @@ export const AddSchoolDialog = ({ onAdd }: AddSchoolDialogProps) => {
       useCommonApp: false,
       useApplyTexas: false,
       useUniversityPortal: false,
+      applicationStatus: "not-started",
     });
     setOpen(false);
   };
@@ -147,6 +152,35 @@ export const AddSchoolDialog = ({ onAdd }: AddSchoolDialogProps) => {
                 </label>
               </div>
             </div>
+          </div>
+
+          <div className="space-y-3">
+            <Label>Application Status</Label>
+            <RadioGroup
+              value={formData.applicationStatus}
+              onValueChange={(value) =>
+                setFormData({ ...formData, applicationStatus: value as any })
+              }
+            >
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="not-started" id="not-started" />
+                <label htmlFor="not-started" className="text-sm cursor-pointer">
+                  Not Started
+                </label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="in-progress" id="in-progress" />
+                <label htmlFor="in-progress" className="text-sm cursor-pointer">
+                  In Progress
+                </label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="submitted" id="submitted" />
+                <label htmlFor="submitted" className="text-sm cursor-pointer">
+                  Submitted
+                </label>
+              </div>
+            </RadioGroup>
           </div>
 
           <Button type="submit" className="w-full">

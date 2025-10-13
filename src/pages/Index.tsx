@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { School } from "@/types/school";
+import { School, Recommender } from "@/types/school";
 import { SchoolCard } from "@/components/SchoolCard";
 import { AddSchoolDialog } from "@/components/AddSchoolDialog";
 import { EventsDialog } from "@/components/EventsDialog";
+import { RecommendersDialog } from "@/components/RecommendersDialog";
 import { CurrencyConverter } from "@/components/CurrencyConverter";
 import { WaecUpload } from "@/components/WaecUpload";
 import { GraduationCap } from "lucide-react";
@@ -12,6 +13,7 @@ const Index = () => {
   const [schools, setSchools] = useState<School[]>([]);
   const [selectedSchool, setSelectedSchool] = useState<School | null>(null);
   const [eventsDialogOpen, setEventsDialogOpen] = useState(false);
+  const [recommendersDialogOpen, setRecommendersDialogOpen] = useState(false);
 
   const handleAddSchool = (school: School) => {
     setSchools([...schools, school]);
@@ -28,6 +30,11 @@ const Index = () => {
     setEventsDialogOpen(true);
   };
 
+  const handleViewRecommenders = (school: School) => {
+    setSelectedSchool(school);
+    setRecommendersDialogOpen(true);
+  };
+
   const handleUpdateEvents = (schoolId: string, events: any[]) => {
     setSchools(
       schools.map((school) =>
@@ -35,6 +42,15 @@ const Index = () => {
       )
     );
     toast.success("Events updated successfully!");
+  };
+
+  const handleUpdateRecommenders = (schoolId: string, recommenders: Recommender[]) => {
+    setSchools(
+      schools.map((school) =>
+        school.id === schoolId ? { ...school, recommenders } : school
+      )
+    );
+    toast.success("Recommenders updated successfully!");
   };
 
   return (
@@ -89,6 +105,7 @@ const Index = () => {
                   school={school}
                   onDelete={handleDeleteSchool}
                   onViewEvents={handleViewEvents}
+                  onViewRecommenders={handleViewRecommenders}
                 />
               ))}
             </div>
@@ -101,6 +118,13 @@ const Index = () => {
         open={eventsDialogOpen}
         onClose={() => setEventsDialogOpen(false)}
         onUpdateEvents={handleUpdateEvents}
+      />
+      
+      <RecommendersDialog
+        school={selectedSchool}
+        open={recommendersDialogOpen}
+        onClose={() => setRecommendersDialogOpen(false)}
+        onUpdateRecommenders={handleUpdateRecommenders}
       />
     </div>
   );

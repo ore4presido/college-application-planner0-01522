@@ -5,6 +5,12 @@ export interface Event {
   description: string;
 }
 
+export interface Recommender {
+  id: string;
+  name: string;
+  status: "not-started" | "in-progress" | "completed";
+}
+
 export interface School {
   id: string;
   name: string;
@@ -14,5 +20,7 @@ export interface School {
   useCommonApp: boolean;
   useApplyTexas: boolean;
   useUniversityPortal: boolean;
+  applicationStatus: "not-started" | "in-progress" | "submitted";
+  recommenders: Recommender[];
   events: Event[];
 }
