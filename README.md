@@ -1,16 +1,22 @@
 College Application Tracker
 
-A responsive web application for managing and tracking college applications.
+This is a web app I built with the aid of Lovable to help my classmates and I stay organized during our college application process.
+It allows users to track deadlines, record application progress, and manage multiple schools easily in one place.
 Built with React, TypeScript, Vite, Tailwind CSS, and shadcn/ui for a clean and modern interface.
 
 Live Demo: https://lovable.dev/projects/b9e1ed17-83df-4b3f-a9d6-834edf88367d
 
 About This Project
 
-The College Application Tracker was created to help students organize and monitor their college applications more effectively.
-It allows users to record application details, track submission progress, and manage upcoming deadlines in one place.
+Features
+1.	Add, edit, and delete college applications
+2. Track submission status (e.g., in progress, submitted, accepted)
+3. See upcoming deadlines at a glance
+5.	Clean, responsive interface
+6. Persistent local storage so data stays after closing the app
 
-The goal of this project is to simplify the college admission process by offering a clear, easy-to-use dashboard that keeps students focused and informed throughout their application journey.
+Why I Built This App
+My classmtes and I struggled with keeping track of the colleges we were applying to and their deadlines,so I decided to build a simple planner that could help us all stay on top of things.
 
 Getting Started
 
